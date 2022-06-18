@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="checkbox" checked id="option">
+                    <input type="checkbox" checked id="option" {{ Auth::user()->admin ? null : 'disabled' }}>
                     {!! Form::label('published_at', 'To be published at:') !!}
                     {!! Form::datetimeLocal('published_at', $post->published_at->format('Y-m-d\TH:i'), ['class'=>'form-control col-4', 'id'=>'time', 'min'=>now('Europe/Belgrade')->format('Y-m-d\TH:i'), 'disabled']) !!}
                 </div>

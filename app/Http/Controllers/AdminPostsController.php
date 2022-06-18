@@ -44,7 +44,6 @@ class AdminPostsController extends Controller
     public function store(PostRequest $request)
     {
         $input = $request->all();
-        $input['published_at'] = str_replace('T', ' ', $input['published_at']) . ':00';
 
         if ($file = $request->file('picture')){
             $name = now('Europe/Belgrade')->format('Y_m_d\_H_i_s') . '_' . $file->getClientOriginalName();
@@ -95,8 +94,8 @@ class AdminPostsController extends Controller
         //
         $this->authorize('update', $post);
         $input = $request->all();
-        if ($request->post('published_at')){
-            $input['published_at'] = str_replace('T', ' ', $input['published_at']) . ':00';
+        if (!(\Auth::user()->admin && $request->post('published_at'))){
+            unset($input['published_at']);
         }
 
         if ($file = $request->file('picture')){
