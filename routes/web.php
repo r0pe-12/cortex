@@ -21,8 +21,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group([], function (){
-   Route::get('/admin', function (){
-       return view('admin.index');
-   })->name('admin.index') ;
+Route::middleware(['auth'])->group( function (){
+//    route for admin home page
+   Route::get('/admin', function (){return view('admin.index');})->name('admin.index') ;
+//   end-route for home page
+
 });

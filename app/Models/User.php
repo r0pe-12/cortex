@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+//    accessor for profile image
+    public function getPictureAttribute($path){
+        # code
+        if ($path){
+            return '/storage/users/' . $path;
+        }
+        return 'https://via.placeholder.com/900x900.png/280137?text=NO%20PHOTO';
+    }
+//    END-accessor for profile image
 }
