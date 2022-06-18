@@ -17,8 +17,8 @@
                     <div class="icon">
                         <i class="fas fa-book-open"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
+                    <a href="{{ route('admin.posts.index') }}" class="small-box-footer">
+                        View all <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                     <div class="icon">
                         <i class="fas fa-book-reader"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
+                    <a href="{{ route('admin.posts.create') }}" class="small-box-footer">
+                        Create one <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        More info <i class="fas fa-arrow-circle-right"></i>
+                        View all <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>

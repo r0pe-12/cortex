@@ -16,7 +16,11 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::latest()->paginate('4');
+        if (\Auth::user()->admin){
+            $posts = Post::latest()->paginate('4');
+        } else{
+            $posts = \Auth::user()->posts()->paginate(4);
+        }
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -75,6 +79,7 @@ class AdminPostsController extends Controller
     public function edit(Post $post)
     {
         //
+        $this->authorize('update', $post);
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -88,6 +93,7 @@ class AdminPostsController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $this->authorize('update', $post);
         $input = $request->all();
         if ($request->post('published_at')){
             $input['published_at'] = str_replace('T', ' ', $input['published_at']) . ':00';
@@ -118,6 +124,7 @@ class AdminPostsController extends Controller
     public function destroy(Post $post)
     {
         //
+        $this->authorize('update', $post);
         if (file_exists($picture = public_path() . $post->picture)){
             unlink($picture);
         }
@@ -127,12 +134,13 @@ class AdminPostsController extends Controller
     }
 
     /**
-     * Remove the picture for specified resource resource from storage.
+     * Remove the picture for specified resource from storage.
      *
      */
     public function destroyPicture($post_id){
         # code
         $post = Post::findOrFail($post_id);
+        $this->authorize('update', $post);
         if (file_exists($picture = public_path() . $post->picture)){
             unlink($picture);
             session()->flash('deleted', 'Picture for post: "' . $post->title . '" was successfully deleted');
