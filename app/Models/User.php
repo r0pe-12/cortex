@@ -42,13 +42,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+//    retrieving number of users
+    public static function count(){
+        # code
+        return count(User::all());
+    }
+//    END-retrieving number of users
+
 //    accessor for profile image
     public function getPictureAttribute($path){
         # code
         if ($path){
-            return '/storage/users/' . $path;
+            return '/storage/images/users/' . $path;
         }
         return 'https://via.placeholder.com/900x900.png/280137?text=NO%20PHOTO';
     }
 //    END-accessor for profile image
+
+//  relation between posts and users : user has many posts
+    public function posts(){
+        # code
+        return $this->hasMany(Post::class);
+    }
+//  END-relation between posts and users : user has many posts
 }

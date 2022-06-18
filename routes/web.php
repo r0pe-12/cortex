@@ -21,9 +21,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->group( function (){
+// todo add middleware for admin as well as policies
+Route::middleware(['auth'])->prefix('admin')->group( function (){
 //    route for admin home page
-   Route::get('/admin', function (){return view('admin.index');})->name('admin.index') ;
+   Route::get('/', function (){return view('admin.index');})->name('admin.index') ;
 //   end-route for home page
+
+//    routes for managing posts on admin side
+    Route::resource('/posts', App\Http\Controllers\AdminPostsController::class, ['as'=>'admin']);
+    Route::post('/picture/destroy/{post_id}', [\App\Http\Controllers\AdminPostsController::class, 'destroyPicture'])->name('admin.posts.picture.destroy');
+//    end-routes for managing posts on admin side
 
 });
