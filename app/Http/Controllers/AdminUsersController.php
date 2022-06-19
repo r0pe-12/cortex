@@ -68,6 +68,7 @@ class AdminUsersController extends Controller
     public function edit(User $user)
     {
         //
+        $this->authorize('update', $user);
         return view('admin.users.edit', compact('user'));
     }
 
@@ -81,6 +82,7 @@ class AdminUsersController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $this->authorize('update', $user);
         $input = $request->all();
         if ($file = $request->file('picture')){
             $name = now('Europe/Belgrade')->format('Y_m_d\_H_i_s') . '_' . $file->getClientOriginalName();

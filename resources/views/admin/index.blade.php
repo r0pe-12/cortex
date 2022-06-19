@@ -58,7 +58,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                     @if(Auth::user()->admin)
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('admin.users.index') }}" class="small-box-footer">
                             View all <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     @endif
