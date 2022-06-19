@@ -113,21 +113,4 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function () {
-            $('#option').click(function () {
-
-                if (this.checked){
-                    $('#time').each(function () {
-                        this.disabled = true;
-                    });
-                }else {
-                    $('#time').each(function () {
-                        this.disabled = false;
-                    });
-                }
-
-            });
-        })
-    </script>
 @endsection

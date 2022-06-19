@@ -60,7 +60,7 @@
                                     @error('g-recaptcha-response')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <button class="btn btn-primary text-uppercase col-5 fa-pull-right" id="submitBtn" type="submit" >Send</button>
+                                    <button class="btn btn-primary text-uppercase col-5 fa-pull-right" id="submitBtn" type="submit" disabled>Send</button>
                                 </div>
                             </form>
                         </div>
