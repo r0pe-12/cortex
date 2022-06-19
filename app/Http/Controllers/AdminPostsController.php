@@ -89,7 +89,7 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         //
         $this->authorize('update', $post);

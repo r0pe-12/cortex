@@ -43,6 +43,22 @@ Auth::routes();
 
     });
 
-    Route::group([], function (){
-        Route::resource('/', \App\Http\Controllers\PublicController::class);
-    });
+
+//    index page --- showing all posts
+    Route::get('/', [\App\Http\Controllers\PublicController::class, 'index'])->name('public.index');
+//    END-index page --- showing all posts
+
+//    showing single post
+    Route::get('/post/{slug}', [\App\Http\Controllers\PublicController::class, 'showOne'])->name('public.one');
+//    END-showing single post
+
+//    showing about page
+    Route::get('/about', [\App\Http\Controllers\PublicController::class, 'about'])->name('about');
+//    END-showing about page
+
+//    showing contact page
+    Route::get('/contact', [\App\Http\Controllers\PublicController::class, 'contact'])->name('contact');
+//    END-showing contact page
+//    sending mail from form
+    Route::post('/contact', [\App\Http\Controllers\PublicController::class, 'mailer'])->name('contact.mail');
+//    END-sending mail from form

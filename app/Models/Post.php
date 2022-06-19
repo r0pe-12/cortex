@@ -53,7 +53,7 @@ class Post extends Model
             }
             return 'https://via.placeholder.com/900x900.png/ff0000/000000?text=NO%20PHOTO';
         }
-        return 'https://via.placeholder.com/900x900.png/280137?text=NO%20PHOTO';
+        return asset('startbootstrap/assets/blurry-gradient-haikei.svg');
     }
 //    END-accessor for post image
 

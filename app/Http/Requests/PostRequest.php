@@ -25,10 +25,9 @@ class PostRequest extends FormRequest
     {
         return [
             //
-            'title'=>'required',
+            'title'=>'required|max:100',
             'short_description'=>'required',
             'content'=>'required',
-            'published_at'=>'required'
         ];
     }
 }

@@ -18,11 +18,11 @@
     @section('content')
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="col-md-10 col-lg-8 col-xl-7 row">
                     @foreach($posts as $post)
                         <!-- Post preview-->
                         <div class="post-preview">
-                            <a href="{{ route('show', $post) }}">
+                            <a href="{{ route('public.one', $post->slug) }}">
                                 <h2 class="post-title">{{ $post->title }}</h2>
                                 <h3 class="post-subtitle">{{ $post->short_description }}</h3>
                             </a>
@@ -37,7 +37,6 @@
                         <!-- Post preview-->
                     @endforeach
 
-                    <hr class="my-4" />
                     <!-- Pager-->
                     {{--laravel paginator--}}
                     <div class="d-flex">
@@ -45,6 +44,7 @@
                             {{$posts->links()}}
                         </div>
                     </div>
+                    <hr class="my-4" />
                 </div>
             </div>
         </div>

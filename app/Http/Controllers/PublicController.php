@@ -3,85 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function index()
-    {
-        //
+    //
+
+    public function index(){
+        # code
         $posts = Post::latest()->where('published_at', '<=', now('Europe/Belgrade'))->paginate(4);
         return view('public.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+//    showing single post
+    public function showOne($slug){
+        # code
+        $post = Post::findBySlugOrFail($slug);
+        $this->authorize('view', $post);
+        return view('public.post', compact('post'));
     }
+//    END-showing single post
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+//    showing about page
+    public function about(){
+        # code
+        $owner = User::where('admin', '=', 1)->first();
+        return view('public.about', compact('owner'));
     }
+//    END-showing about page
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+//    showing contact page
+    public function contact(){
+        # code
+        return view('public.contact');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+//    END-showing contact page
+//    sending mail
+    public function mailer(Request $request){
+        # code
+        $input = $this->validate($request, [
+            'name'=>'required',
+            'email'=>'required|email',
+            'phone'=>'required',
+            'message'=>'required|max:3000'
+        ]);
+        $data = [
+            'name'=>$input['name'],
+            'title'=>'Laravel Blog-Post Project',
+            'content'=>$input['message'],
+            'email'=>$input['email'],
+            'phone'=>$input['phone']
+        ];
+        \Mail::send('mail', $data, function ($message) use ($data) {
+            $message->subject('Blog-Post')->from($data['email'], $data['name'])->to('r0pe@protonmail.com', 'Petar Simonovic');
+        });
+        session()->flash('mail-sent', 'Mail was sent successfully');
+        return back();
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+//    END-sending mail
 }
