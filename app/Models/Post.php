@@ -47,6 +47,10 @@ class Post extends Model
     //    accessor for post image
     public function getPictureAttribute($path){
         # code
+        if (strpos($path, 'http://') !== FALSE || strpos($path, 'https://') !== FALSE){
+            return $path;
+        }
+
         if ($path){
             if (file_exists(public_path() . '/storage/images/posts/' . $path)){
                 return '/storage/images/posts/' . $path;

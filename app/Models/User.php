@@ -54,6 +54,10 @@ class User extends Authenticatable
 //    accessor for profile image
     public function getPictureAttribute($path){
         # code
+        if (strpos($path, 'http://') !== FALSE || strpos($path, 'https://') !== FALSE){
+            return $path;
+        }
+
         if ($path){
             return '/storage/images/users/' . $path;
         }
