@@ -31,6 +31,9 @@ class PostPolicy
     public function view(User $user, Post $post)
     {
         //
+        if ($user->admin || $post->user_id === $user->id){
+            return true;
+        }
         return $post->published_at <= now() ? true : false;
     }
 

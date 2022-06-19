@@ -22,7 +22,6 @@ Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logou
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// todo add (middleware for admin) as well as policies
 
     Route::middleware(['auth'])->prefix('admin')->group( function (){
 

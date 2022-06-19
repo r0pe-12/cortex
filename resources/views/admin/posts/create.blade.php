@@ -5,6 +5,8 @@
     @endsection
 
     @section('content')
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 {{--        todo preuzmi fajlove za tiny jer ovo sa neta sporo ucitava--}}
         <x-tiny></x-tiny>
         {!! Form::open(['method'=>'POST', 'action'=>'AdminPostsController@store', 'files'=>true]) !!}

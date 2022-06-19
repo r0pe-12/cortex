@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class AdminUsersController extends Controller
 {
-//    todo makni route model binding svuda
 
     public function __construct()
     {
@@ -130,6 +129,6 @@ class AdminUsersController extends Controller
             session()->flash('deleted', 'Picture for post: "' . $user->name . '" was successfully deleted');
         }
         $user->update(['picture'=>null]);
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.users.index');
     }
 }

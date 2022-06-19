@@ -23,6 +23,7 @@
                                 <th>Published At</th>
                                 <th>Updated At</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,6 +36,7 @@
                                         <td>{{ $post->published_at->diffForHumans() }}</td>
                                         <td>{{ $post->updated_at->diffForHumans() }}</td>
                                         <td><a href="{{ route('admin.posts.edit', $post) }}">Edit Post here</a></td>
+                                        <td><a href="{{ route('public.one', $post->slug) }}">Preview Post here</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -46,6 +48,7 @@
                                 <th>Title</th>
                                 <th>Published At</th>
                                 <th>Updated At</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                             </tfoot>
