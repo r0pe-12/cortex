@@ -28,10 +28,10 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Post $post)
+    public function view(?User $user, Post $post)
     {
         //
-        if ($user->admin || $post->user_id === $user->id){
+        if (optional($user)->admin || $post->user_id === optional($user)->id){
             return true;
         }
         return $post->published_at <= now() ? true : false;
