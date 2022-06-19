@@ -32,30 +32,37 @@
                                 @csrf
                                 <div class="form-floating">
                                     <input class="form-control @error('name') is-invalid @enderror" id="name" name="name" type="text" placeholder="Enter your name..."/>
-                                    @error('name') <div class="text-danger"><small><sup>*</sup>{{ $message }}</small></div> @enderror
+                                    @error('name') <div class="invalid-feedback"><small><sup>*</sup>{{ $message }}</small></div> @enderror
                                     <label for="name">Name</label>
                                 </div>
 
                                 <div class="form-floating">
                                     <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" type="email" placeholder="Enter your email..."/>
-                                    @error('email') <div class="text-danger"><small><sup>*</sup>{{ $message }}</small></div> @enderror
+                                    @error('email') <div class="invalid-feedback"><small><sup>*</sup>{{ $message }}</small></div> @enderror
                                     <label for="email">Email address</label>
                                 </div>
 
                                 <div class="form-floating">
                                     <input class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" type="tel" placeholder="Enter your phone number..."/>
-                                    @error('email') <div class="text-danger"><small><sup>*</sup>{{ $message }}</small></div> @enderror
+                                    @error('email') <div class="invalid-feedback"><small><sup>*</sup>{{ $message }}</small></div> @enderror
                                     <label for="phone">Phone Number</label>
                                 </div>
                                 <br><br>
                                 <div class="form-floating">
                                     <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" placeholder="Enter your message here..." style="height: 12rem"></textarea>
-                                    @error('message') <div class="text-danger"><small><sup>*</sup>{{ $message }}</small></div> @enderror
+                                    @error('message') <div class="invalid-feedback"><small><sup>*</sup>{{ $message }}</small></div> @enderror
                                     <label for="message">Message</label>
                                 </div>
 
                                 <br/>
-                                <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
+                                <div class="form-group row">
+                                    <div class="col-md-6 fa-pull-left"> {!! htmlFormSnippet(["callback"=>"callback"]) !!} </div>
+                                    @error('g-recaptcha-response')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+{{--                                    {!! htmlFormButton('Send', ['class'=>'btn btn primary text-uppercase col-5 fa-pullright']) !!}--}}
+                                    <button class="btn btn-primary text-uppercase col-5 fa-pull-right" id="submitBtn" type="submit" disabled>Send</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -64,5 +71,14 @@
         </main>
 
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    @endsection
+
+    @section('scripts')
+        <script type="text/javascript">
+            function callback() {
+                const submitButton = document.getElementById("submitBtn");
+                submitButton.removeAttribute("disabled");
+            }
+        </script>
     @endsection
 

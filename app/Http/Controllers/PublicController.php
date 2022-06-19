@@ -42,11 +42,13 @@ class PublicController extends Controller
 //    sending mail
     public function mailer(Request $request){
         # code
+//        dd($request->all());
         $input = $this->validate($request, [
             'name'=>'required',
             'email'=>'required|email',
             'phone'=>'required',
-            'message'=>'required|max:3000'
+            'message'=>'required|max:3000',
+            recaptchaFieldName() => recaptchaRuleName(),
         ]);
         $data = [
             'name'=>$input['name'],

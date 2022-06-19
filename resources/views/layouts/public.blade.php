@@ -15,6 +15,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}" class="css">
         <link href="{{ asset('startbootstrap/css/styles.css') }}" rel="stylesheet" />
+        {!! ReCaptcha::htmlScriptTagJsApi() !!}
     </head>
     <body>
         <!-- Navigation-->
@@ -86,5 +87,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('startbootstrap/js/scripts.js') }}"></script>
+        @yield('scripts')
     </body>
 </html>
