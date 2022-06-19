@@ -23,6 +23,22 @@
                 @error('email') <div class="text-danger"><sup>*</sup>{{ $message }}</div> @enderror
                 {!! Form::email('email', null, ['class'=>$errors->has('email') ? 'form-control is-invalid' : 'form-control']) !!}
             </div>
+{{--todo doaj ovdje dugme kad ga stises da se ova polja otvore--}}
+                <div class="form-group">
+                    {!! Form::label('password', 'Password: ') !!}
+                    {!! Form::password('password', ['class'=>$errors->has('email') ? 'form-control is-invalid' : 'form-control']) !!}
+                    @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('password_confirmation', 'Confirm Password: ') !!}
+                    {!! Form::password('password_confirmation', ['class'=>$errors->has('email') ? 'form-control is-invalid' : 'form-control']) !!}
+                    @error('password_confirmation')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
             <div class="form-group">
                 {!! Form::label('about', 'About:') !!}

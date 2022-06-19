@@ -83,7 +83,18 @@ class AdminUsersController extends Controller
     {
         //
         $this->authorize('update', $user);
-        $input = $request->all();
+        $input = $this->validate($request, [
+            'name'=>'required|string|max:255',
+            'picture'=>'file',
+            'email'=>'required|email|max:255',
+            'password'=>'confirmed',
+            'about'=>'required'
+        ]);
+
+        if (!$input['password']){
+            unset($input['password']);
+        }
+
         if ($file = $request->file('picture')){
             $name = now('Europe/Belgrade')->format('Y_m_d\_H_i_s') . '_' . $file->getClientOriginalName();
             $file->storeAs('/images/users', $name);

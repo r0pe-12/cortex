@@ -67,4 +67,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 //  END-relation between posts and users : user has many posts
+
+//    password mutator
+    public function setPasswordAttribute($password){
+        # code
+        $this->attributes['password'] = bcrypt($password);
+    }
+//    END-password mutator
 }
