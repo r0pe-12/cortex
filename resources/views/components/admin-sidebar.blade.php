@@ -34,13 +34,22 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="fa fa-arrow-circle-right"></i>
+                                <p>Log Out</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 @if(Auth::user()->admin)
     {{--                this tab will show if logged in user is admin--}}

@@ -89,6 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @yield('header')
           <div class="row">
               <div class="col-12">
+                  <x-sessions></x-sessions>
                   @yield('content')
               </div>
           </div>

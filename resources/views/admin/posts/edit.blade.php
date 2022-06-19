@@ -46,7 +46,31 @@
                 <br>
                 <img src="{{ $post->picture }}" alt="" class="img-fluid img-rounded">
                 <br><br>
-                <a href="#" data-toggle="modal" data-target="#deletePictureModal" class="btn btn-outline-danger col-5 center">Delete Post Picture</a>
+                @if($post->getAttributes()['picture'])
+                    <a href="#" data-toggle="modal" data-target="#deletePictureModal" class="btn btn-outline-danger col-5 center">Delete Post Picture</a>
+                    {{--    delete picture modal--}}
+                    <div class="modal fade" id="deletePictureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">You are about to delete Picture for Post: "{{ $post->title }}"</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body alert alert-danger">This action is not reversible</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+                                    <form method="post" action="{{route('admin.posts.picture.destroy', $post->id)}}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">DELETE</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -68,29 +92,6 @@
                         <form method="post" action="{{route('admin.posts.destroy', $post)}}" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">DELETE</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    {{--    delete picture modal--}}
-        <div class="modal fade" id="deletePictureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">You are about to delete Picture for Post: "{{ $post->title }}"</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body alert alert-danger">This action is not reversible</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-
-                        <form method="post" action="{{route('admin.posts.picture.destroy', $post->id)}}">
-                            @csrf
                             <button type="submit" class="btn btn-danger">DELETE</button>
                         </form>
                     </div>

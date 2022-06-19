@@ -17,9 +17,11 @@
                     <div class="icon">
                         <i class="fas fa-book-open"></i>
                     </div>
-                    <a href="{{ route('admin.posts.index') }}" class="small-box-footer">
-                        View all <i class="fas fa-arrow-circle-right"></i>
-                    </a>
+                    @if(Auth::user()->admin)
+                        <a href="{{ route('admin.posts.index') }}" class="small-box-footer">
+                            View all <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -33,9 +35,15 @@
                     <div class="icon">
                         <i class="fas fa-book-reader"></i>
                     </div>
-                    <a href="{{ route('admin.posts.create') }}" class="small-box-footer">
-                        Create one <i class="fas fa-arrow-circle-right"></i>
-                    </a>
+                    @if(Auth::user()->admin)
+                        <a href="{{ route('admin.posts.create') }}" class="small-box-footer">
+                            Create one <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    @else
+                        <a href="{{ route('admin.posts.index') }}" class="small-box-footer">
+                            View them <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -49,9 +57,11 @@
                     <div class="icon">
                         <i class="fas fa-user"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
-                        View all <i class="fas fa-arrow-circle-right"></i>
-                    </a>
+                    @if(Auth::user()->admin)
+                        <a href="#" class="small-box-footer">
+                            View all <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

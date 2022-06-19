@@ -62,13 +62,21 @@
                     {{$posts->links()}}
                 </div>
             </div>
+
         @else
-                <!-- small card -->
+            <div class="col-lg-12 col-12">
+            <!-- small card -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{ \App\Models\Post::count() }}</h3>
+                        @if(Auth::user()->admin)
+                            <h3>{{ \App\Models\Post::count() }}</h3>
 
-                        <p>Posts</p>
+                            <p>Posts</p>
+                        @else
+                            <h3>{{ count(Auth::user()->posts) }}</h3>
+
+                            <p>Posts you own</p>
+                        @endif
                     </div>
                     <div class="icon">
                         <i class="fas fa-book-open"></i>
@@ -77,5 +85,6 @@
                         Create First One <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
+            </div>
         @endif
     @endsection
